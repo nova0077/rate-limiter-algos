@@ -12,6 +12,7 @@ public class RateLimitResult {
     private final int remainingTokens;
     private final long retryAfterMillis;
     private final long resetAtMillis;
+    private final String algorithmName;
 
     public RateLimitResult(boolean isAllowed, int limit, int remainingTokens,
                            long retryAfterMillis, long resetAtMillis, String algorithmName) {
@@ -59,7 +60,7 @@ public class RateLimitResult {
     
     @Override
     public String toString() {
-        if(allowed) {
+        if(isAllowed) {
             return String.format("[%s] Allowed | Remaining Tokens: %d/%d | Reset in: %dms", algorithmName, remainingTokens, limit, resetAtMillis);
         } else {
             return String.format("[%s] Rejected | Limit: %d | Retry after: %dms", algorithmName, limit, retryAfterMillis);
